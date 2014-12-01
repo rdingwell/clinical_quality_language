@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 Prospective warnings of potential issues when providing care to the patient.
 @class Alert

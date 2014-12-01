@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.
 @class Media

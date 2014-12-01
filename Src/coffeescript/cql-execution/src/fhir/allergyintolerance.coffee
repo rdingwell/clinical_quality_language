@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 Indicates the patient has a susceptibility to an adverse reaction upon exposure to a specified substance.
 @class AllergyIntolerance

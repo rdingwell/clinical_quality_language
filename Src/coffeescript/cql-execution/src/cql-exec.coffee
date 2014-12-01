@@ -1,7 +1,7 @@
 { Patient } = require './cql-patient'
 
 DT = require './cql-datatypes'
-QP = require './quick/models'
+QP = require './fhir/models'
 typeIsArray = Array.isArray || ( value ) -> return {}.toString.call( value ) is '[object Array]'
 
 functionExists = (name) -> eval("typeof #{name}") is "function"

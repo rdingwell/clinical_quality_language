@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 Other is a conformant for handling resource concepts not yet defined for FHIR or outside HL7's scope of interest.
 @class Other

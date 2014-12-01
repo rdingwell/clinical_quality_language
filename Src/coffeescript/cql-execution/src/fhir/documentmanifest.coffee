@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 A manifest that defines a set of documents.
 @class DocumentManifest

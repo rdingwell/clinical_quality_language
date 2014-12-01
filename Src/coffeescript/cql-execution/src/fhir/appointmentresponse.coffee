@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.
 @class AppointmentResponse

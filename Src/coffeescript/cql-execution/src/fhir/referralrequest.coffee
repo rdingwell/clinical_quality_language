@@ -27,8 +27,6 @@
 @namespacing scoping into the FHIR namespace
 ###
 require './core'
-require './element'
-require './resource'
 ###*
 Used to record and send details about a request for referral service or transfer of a patient to the care of another provider or provider organisation.
 @class ReferralRequest
