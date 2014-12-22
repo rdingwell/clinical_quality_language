@@ -64,7 +64,9 @@ define Zero = Abs(0)
 
 // @Test: Round 
 define Up = Round(4.56)
+define Up_percent = Round(4.56,1)
 define Down = Round(4.49)
+define Down_percent = Round(4.43,1)
 
 // @Test: Ln 
 define ln = Ln(4)

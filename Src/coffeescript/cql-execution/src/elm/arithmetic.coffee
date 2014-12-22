@@ -1,5 +1,13 @@
 { Expression, UnimplementedExpression } = require './expression'
 { FunctionRef } = require './reusable'
+{ typeIsArray , allTrue, anyTrue} = require '../util/util'
+
+MAX_INT_VALUE = Math.pow(2,31)-1
+MIN_INT_VALUE = Math.pow(2,-31)
+MAX_FLOAT_VALUE =  ( Math.pow(10,37)-1 ) / Math.pow(10,8)
+MIN_FLOAT_VALUE = (Math.pow(-10,37)) / Math.pow(10,8)
+MIN_FLOAT_PRECISION_VALUE =  Math.pow(10,-8)
+
 module.exports.Add = class Add extends Expression
   constructor: (json) ->
     super
@@ -172,7 +180,16 @@ module.exports.Round = class Round extends  Expression
     super
 
   exec: (ctx) ->
-    Math.round @execArgs(ctx)
+    args = @execArgs(ctx)
+    if typeIsArray(args)
+      [n,d] = args
+      @round_number(n,d)
+    else
+      Math.round args
+
+  round_number: (num, dec=0) ->
+    return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec)
+
 
   # TODO: Remove functionref when ELM does Round natively
 module.exports.RoundFunctionRef = class RoundFunctionRef extends FunctionRef
@@ -245,10 +262,60 @@ module.exports.PowerFunctionRef = class PowerFunctionRef extends FunctionRef
     @func.exec(ctx)   
     
 
-module.exports.MinValue = class MinValue extends UnimplementedExpression
+module.exports.MinValue = class MinValue extends Expression
+  constructor: (json) ->
+    super
 
-module.exports.MaxValue = class MaxValue extends UnimplementedExpression
+  exec: (ctx) ->
+    val = @execArgs(ctx)
+    if val == "Integer"
+      MIN_INT_VALUE
+    else if val = "Real"
+      MIN_FLOAT_VALUE
+    else if val == "DateTime"
+      DT.DateTime.parse("19000101000000000")
 
-module.exports.Successor = class Successor extends UnimplementedExpression
+module.exports.MaxValue = class MaxValue extends Expression
+  constructor: (json) ->
+    super
 
-module.exports.Predecessor = class Predecessor extends UnimplementedExpression
+  exec: (ctx) ->
+    val = @execArgs(ctx)
+    if val == "Integer"
+      MAX_INT_VALUE
+    else if val = "Real"
+      MAX_FLOAT_VALUE
+    else if val == "DateTime"
+      DT.DateTime.parse("99991231235959999")
+
+module.exports.Successor = class Successor extends Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    val = @execArgs(ctx)
+    if typeof val == "number"
+      if parseInt(val) == val
+        nv =  val + 1
+        if nv > MAX_INT_VALUE then throw "Number Overflow Expection" else nv
+      else
+        nv =  val + MIN_FLOAT_PRECISION_VALUE
+        if nv > MAX_FLOAT_VALUE then throw "Number Overflow Expection" else nv
+    else if val instanceof DT.DateTime
+      va.successor()    
+
+module.exports.Predecessor = class Predecessor extends  Expression
+  constructor: (json) ->
+    super
+
+  exec: (ctx) ->
+    val = @execArgs(ctx)
+    if typeof val == "number"
+      if parseInt(val) == val
+        nv =  val - 1
+        if nv > MIN_INT_VALUE then throw "Number UNDERFLOW Expection" else nv
+      else
+        nv =  val  -  MIN_FLOAT_PRECISION_VALUE
+        if nv > MIN_FLOAT_VALUE then throw "Number Overflow Expection" else nv
+    else if val instanceof DT.DateTime
+      va.predecessor()    

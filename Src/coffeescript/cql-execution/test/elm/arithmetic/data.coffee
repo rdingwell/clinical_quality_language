@@ -1168,7 +1168,9 @@ library TestSnippet version '1'
 using QUICK
 context Patient
 define Up = Round(4.56)
+define Up_percent = Round(4.56,1)
 define Down = Round(4.49)
+define Down_percent = Round(4.43,1)
 ###
 
 module.exports['Round'] = {
@@ -1212,6 +1214,22 @@ module.exports['Round'] = {
                } ]
             }
          }, {
+            "name" : "Up_percent",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Round",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "4.56",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
             "name" : "Down",
             "context" : "Patient",
             "expression" : {
@@ -1220,6 +1238,22 @@ module.exports['Round'] = {
                "operand" : [ {
                   "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
                   "value" : "4.49",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Down_percent",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Round",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "4.43",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "1",
                   "type" : "Literal"
                } ]
             }

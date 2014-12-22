@@ -152,4 +152,8 @@ describe 'Round', ->
   it "should be able to round a number up or down to the closest integer value", ->
     @up.exec(@ctx).should.equal 5
     @down.exec(@ctx).should.equal 4
-  
+  it "should be able to round a number up or down to the closest decimal place ", ->
+    @up_percent.exec(@ctx).should.equal 4.6
+    @down_percent.exec(@ctx).should.equal 4.4
+
+    
