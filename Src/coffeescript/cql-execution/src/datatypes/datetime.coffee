@@ -48,6 +48,47 @@ module.exports.DateTime = class DateTime
   copy: () ->
     new DateTime(@year, @month, @day, @hour, @minute, @second, @millisecond, @timeZoneOffset)
 
+  successor: () ->
+    clone = @copy()
+    if @millisecond
+      clone.millisecond += 1
+    else if @second
+      clone.second += 1
+    else if @minute
+      clone.minute += 1
+    else if @hour
+      clone.hour += 1
+    else if @day
+      clone.day += 1
+    else if @month
+      clone.month += 1
+    else if @year
+      clone.year += 1
+    else
+      clone = null
+    clone
+
+  predecessor: () ->
+    clone = @copy()
+    if @millisecond
+      clone.millisecond -= 1
+    else if @second
+      clone.second -=1
+    else if @minute
+      clone.minute -=1
+    else if @hour
+      clone.hour -= 1
+    else if @day
+      clone.day -= 1
+    else if @month
+      clone.month -= 1
+    else if @year
+      clone.year -= 1
+    else
+      clone = null
+    clone
+
+
   convertToTimeZoneOffset: (timeZoneOffset = 0) ->
     DateTime.fromDate(@toJSDate(), timeZoneOffset)
 

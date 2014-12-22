@@ -76,9 +76,21 @@ define log = Log(10,10000)
 
 
 // @Test: MinValue
+define Mi = MinValue("Integer")
+define Mr = MinValue("Real")
+define Md = MinValue("DateTime")
 
 // @Test: MaxValue 
+define Mi = MaxValue("Integer")
+define Mr = MaxValue("Real")
+define Md = MaxValue("DateTime")
 
 // @Test: Successor
 
+define Is = Succ(2)
+define Rs = Succ(2.2)
+
 // @Test: Predecessor
+
+define Is = Pred(2)
+define Rs = Pred(2.2)
