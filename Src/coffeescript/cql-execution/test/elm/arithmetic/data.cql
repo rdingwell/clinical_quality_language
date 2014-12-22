@@ -33,3 +33,50 @@ define NegativeOne = -1
 // @Test: MathPrecedence
 define Mixed = 1 + 5 * 10 - 15 / 3
 define Parenthetical = (1 + 5) * (10 - 15) / 3
+
+// @Test: Power
+define Pow = 3 ^ 4
+
+// @Test: TruncatedDivide
+define Trunc = TruncatedDivide(10,3)
+define Even = TruncatedDivide(9,3)
+
+// @Test: Modulo 
+define Mod = Modulo(3 , 2)
+
+// @Test: Ceiling 
+define Ceil = Ceiling(10.1)
+define Even = Ceiling(10)
+
+// @Test: Floor
+define flr = Floor(10.1)
+define Even = Floor(10)
+
+
+// @Test: Truncate
+define Trunc = Truncate(10.1)
+define Even = Truncate(10)
+
+// @Test: Abs 
+define Pos = Abs(10)
+define Neg = Abs(-10)
+define Zero = Abs(0)
+
+// @Test: Round 
+define Up = Round(4.56)
+define Down = Round(4.49)
+
+// @Test: Ln 
+define ln = Ln(4)
+
+// @Test: Log 
+define log = Log(10,10000)
+
+
+// @Test: MinValue
+
+// @Test: MaxValue 
+
+// @Test: Successor
+
+// @Test: Predecessor

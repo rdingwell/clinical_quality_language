@@ -703,3 +703,732 @@ module.exports['MathPrecedence'] = {
    }
 }
 
+### Power
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Pow = 3 ^ 4
+###
+
+module.exports['Power'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Pow",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Power",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "3",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "4",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### TruncatedDivide
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Trunc = TruncatedDivide(10,3)
+define Even = TruncatedDivide(9,3)
+###
+
+module.exports['TruncatedDivide'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Trunc",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "TruncatedDivide",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "3",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Even",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "TruncatedDivide",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "9",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "3",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Modulo
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Mod = Modulo(3 , 2)
+###
+
+module.exports['Modulo'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Mod",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Modulo",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "3",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "2",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Ceiling
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Ceil = Ceiling(10.1)
+define Even = Ceiling(10)
+###
+
+module.exports['Ceiling'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Ceil",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Ceiling",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "10.1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Even",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Ceiling",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Floor
+library TestSnippet version '1'
+using QUICK
+context Patient
+define flr = Floor(10.1)
+define Even = Floor(10)
+###
+
+module.exports['Floor'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "flr",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Floor",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "10.1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Even",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Floor",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Truncate
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Trunc = Truncate(10.1)
+define Even = Truncate(10)
+###
+
+module.exports['Truncate'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Trunc",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Truncate",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "10.1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Even",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Truncate",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Abs
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Pos = Abs(10)
+define Neg = Abs(-10)
+define Zero = Abs(0)
+###
+
+module.exports['Abs'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Pos",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Abs",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Neg",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Abs",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "type" : "Negate",
+                  "operand" : {
+                     "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                     "value" : "10",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "name" : "Zero",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Abs",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "0",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Round
+library TestSnippet version '1'
+using QUICK
+context Patient
+define Up = Round(4.56)
+define Down = Round(4.49)
+###
+
+module.exports['Round'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Up",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Round",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "4.56",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "name" : "Down",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Round",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "4.49",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Ln
+library TestSnippet version '1'
+using QUICK
+context Patient
+define ln = Ln(4)
+###
+
+module.exports['Ln'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "ln",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Ln",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "4",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### Log
+library TestSnippet version '1'
+using QUICK
+context Patient
+define log = Log(10,10000)
+###
+
+module.exports['Log'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "log",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "Log",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10",
+                  "type" : "Literal"
+               }, {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "10000",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+### MinValue
+library TestSnippet version '1'
+using QUICK
+###
+
+module.exports['MinValue'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      }
+   }
+}
+
+### MaxValue
+library TestSnippet version '1'
+using QUICK
+###
+
+module.exports['MaxValue'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      }
+   }
+}
+
+### Successor
+library TestSnippet version '1'
+using QUICK
+###
+
+module.exports['Successor'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      }
+   }
+}
+
+### Predecessor
+library TestSnippet version '1'
+using QUICK
+###
+
+module.exports['Predecessor'] = {
+   "library" : {
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://org.hl7.fhir"
+         } ]
+      }
+   }
+}
+
