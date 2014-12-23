@@ -156,4 +156,43 @@ describe 'Round', ->
     @up_percent.exec(@ctx).should.equal 4.6
     @down_percent.exec(@ctx).should.equal 4.4
 
+describe.only 'Successor', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should be able to get Integer Successor", ->
+    @is.exec(@ctx).should.equal 3
+  it "should be able to get Real Successor", ->
+    @rs.exec(@ctx).should.equal ( 2.2  + Math.pow(10,-8) )
+  it "should cause runtime error for Successor greater than Integer Max value" , ->
+  
+  it "should cause runtime error for Successor greater than Ral Max value" , ->
+    a = false
+    try 
+      @ofr.exec(@ctx)
+    catch e
+      e.should.equal "Number Overflow Expection"
+      a = true
     
+    a.should.equal true
+
+
+describe.only 'Predecessor', ->
+  @beforeEach ->
+    setup @, data
+
+  it "should be able to get Integer Predecessor", ->
+    @is.exec(@ctx).should.equal 1
+  it "should be able to get Real Predecessor", ->
+    @rs.exec(@ctx).should.equal ( 2.2  - Math.pow(10,-8))   
+  it "should cause runtime error for Predecessor greater than Integer Max value" , ->
+  
+  it "should cause runtime error for Predecessor greater than Ral Max value" , ->  
+    a = false
+    try 
+      @ufr.exec(@ctx)
+    catch e
+      e.should.equal "Number UNDERFLOW Expection"
+      a = true
+    
+    a.should.equal true

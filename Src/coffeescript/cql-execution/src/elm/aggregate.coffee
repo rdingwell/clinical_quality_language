@@ -1,15 +1,15 @@
 { Expression, UnimplementedExpression } = require './expression'
 { FunctionRef } = require './reusable'
-{ typeIsArray , allTrue, anyTrue} = require '../util/util'
+{ typeIsArray , allTrue, anyTrue, compact, numerical_sort} = require '../util/util'
 
 module.exports.Count = class Count extends Expression
   constructor:(json) ->
     super
 
   exec: (ctx) ->
-    arg = @execArgs(ctx)
+    arg = @execArgs(ctx)[0]
     if typeIsArray(arg)
-      (arg.filter (x) -> return x).length
+      compact(arg).length
 
   # TODO: Remove functionref when ELM does Round natively
 module.exports.CountFunctionRef = class CountFunctionRef extends FunctionRef
@@ -28,8 +28,12 @@ module.exports.Sum = class Sum extends Expression
     super
 
   exec: (ctx) ->
-    @execArgs(ctx).reduce (x,y) -> x+y
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered =  compact(arg)
+      if filtered.length == 0 then null else filtered.reduce (x,y) -> x+y
 
+      
   # TODO: Remove functionref when ELM does Sum natively
 module.exports.SumFunctionRef = class SumFunctionRef extends FunctionRef
   constructor: (json) ->
@@ -47,7 +51,11 @@ module.exports.Min = class Min extends Expression
     super
 
   exec: (ctx) ->
-    @execArgs(ctx).sort()[0]
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered =  numerical_sort(compact(arg),"asc")
+      filtered[0]
+    
 
 
   # TODO: Remove functionref when ELM does Min natively
@@ -68,8 +76,10 @@ module.exports.Max = class Max extends Expression
     super
 
   exec: (ctx) ->
-    args = @execArgs(ctx).sort()
-    args[args.length-1]
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered =  numerical_sort(compact(arg),"desc")
+      filtered[0]
 
 
   # TODO: Remove functionref when ELM does Min natively
@@ -90,9 +100,12 @@ module.exports.Avg = class Avg extends  Expression
     super
 
   exec: (ctx) ->
-    args = @execArgs(ctx)
-    sum = args.reduce (x,y) -> x+y
-    sum / args.length 
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered = compact(arg)
+      return null if filtered.length == 0
+      sum = filtered.reduce (x,y) -> x+y
+      sum / filtered.length 
 
 
   # TODO: Remove functionref when ELM does Avg natively
@@ -112,14 +125,16 @@ module.exports.Median = class Median extends Expression
     super
 
   exec: (ctx) ->
-    sorted = @execArgs(ctx).sort()
-    if sorted.length == 0
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered =  numerical_sort(compact(arg),"asc")
+    if filtered.length == 0
       null
-    else if (sorted.length % 2 == 1)
-      sorted[(sorted.length - 1) / 2]
+    else if (filtered.length % 2 == 1)
+      filtered[(filtered.length - 1) / 2]
     else
-      (sorted[(sorted.length / 2) - 1] +
-       sorted[(sorted.length / 2)]) / 2
+      (filtered[(filtered.length / 2) - 1] +
+       filtered[(filtered.length / 2)]) / 2
 
   # TODO: Remove functionref when ELM does Median natively
 module.exports.MedianFunctionRef = class MedianFunctionRef extends FunctionRef
@@ -138,12 +153,13 @@ module.exports.Mode = class Mode extends Expression
     super
 
   exec: (ctx) ->
-    args = @execArgs(ctx)
-    if typeIsArray(args) 
-      val = args.filter (x) -> x
-      @mode(val)
+    arg = @execArgs(ctx)[0]
+    if typeIsArray(arg)
+      filtered = compact(arg)
+      mode = @mode(filtered)
+      if mode.length == 1 then  mode[0] else numerical_sort(mode)
 
-  mode = (arr) ->
+  mode: (arr) ->
     # returns an array with the modes of arr, i.e. the
     # elements that appear most often in arr
     counts = {}
@@ -175,9 +191,9 @@ module.exports.StdDev = class StdDev extends Expression
     @type = "standard_deviation"
 
   exec: (ctx) ->
-    args = @execArgs(ctx)
+    args = @execArgs(ctx)[0]
     if typeIsArray(args) 
-      val = args.filter (x) -> x
+      val = compact(arg)
       if val.length > 0 then @calculate(val)  else null
   
   calculate: (list) ->
@@ -268,7 +284,7 @@ module.exports.AllTrue = class AllTrue extends Expression
     super
 
   exec: (ctx) ->
-    args = @execArgs(ctx)
+    args = @execArgs(ctx)[0]
     allTrue(args)
 
   # TODO: Remove functionref when ELM does AllTrue natively
@@ -288,7 +304,7 @@ module.exports.AnyTrue = class AnyTrue extends Expression
     super
 
   exec: (ctx) ->
-    args = @execArgs(ctx)
+    args = @execArgs(ctx)[0]
     anyTrue(args)
 
   # TODO: Remove functionref when ELM does AnyTrue natively

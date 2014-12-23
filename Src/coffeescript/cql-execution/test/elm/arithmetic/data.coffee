@@ -1373,6 +1373,10 @@ module.exports['Log'] = {
 ### MinValue
 library TestSnippet version '1'
 using QUICK
+context Patient
+define Mi = MinValue("Integer")
+define Mr = MinValue("Real")
+define Md = MinValue("DateTime")
 ###
 
 module.exports['MinValue'] = {
@@ -1390,6 +1394,53 @@ module.exports['MinValue'] = {
             "localIdentifier" : "QUICK",
             "uri" : "http://org.hl7.fhir"
          } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Mi",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MinValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "Integer",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         }, {
+            "name" : "Mr",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MinValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "Real",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         }, {
+            "name" : "Md",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MinValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "DateTime",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         } ]
       }
    }
 }
@@ -1397,6 +1448,10 @@ module.exports['MinValue'] = {
 ### MaxValue
 library TestSnippet version '1'
 using QUICK
+context Patient
+define Mi = MaxValue("Integer")
+define Mr = MaxValue("Real")
+define Md = MaxValue("DateTime")
 ###
 
 module.exports['MaxValue'] = {
@@ -1414,6 +1469,53 @@ module.exports['MaxValue'] = {
             "localIdentifier" : "QUICK",
             "uri" : "http://org.hl7.fhir"
          } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Mi",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MaxValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "Integer",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         }, {
+            "name" : "Mr",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MaxValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "Real",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         }, {
+            "name" : "Md",
+            "context" : "Patient",
+            "expression" : {
+               "name" : "MaxValue",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "name" : "DateTime",
+                  "type" : "IdentifierRef"
+               } ]
+            }
+         } ]
       }
    }
 }
@@ -1421,6 +1523,11 @@ module.exports['MaxValue'] = {
 ### Successor
 library TestSnippet version '1'
 using QUICK
+context Patient
+
+define Is = successor of 2
+define Rs = successor of 2.2
+define ofr = successor of 9999999999999999999999999999.99999999
 ###
 
 module.exports['Successor'] = {
@@ -1438,6 +1545,53 @@ module.exports['Successor'] = {
             "localIdentifier" : "QUICK",
             "uri" : "http://org.hl7.fhir"
          } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Is",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Successor",
+               "operand" : {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "2",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "Rs",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Successor",
+               "operand" : {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "2.2",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "ofr",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Successor",
+               "operand" : {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "9999999999999999999999999999.99999999",
+                  "type" : "Literal"
+               }
+            }
+         } ]
       }
    }
 }
@@ -1445,6 +1599,14 @@ module.exports['Successor'] = {
 ### Predecessor
 library TestSnippet version '1'
 using QUICK
+context Patient
+
+define Is = predecessor of 2
+define Rs = predecessor 2.2
+define ufr = predecessor of -9999999999999999999999999999.99999999
+
+
+  
 ###
 
 module.exports['Predecessor'] = {
@@ -1461,6 +1623,56 @@ module.exports['Predecessor'] = {
          "def" : [ {
             "localIdentifier" : "QUICK",
             "uri" : "http://org.hl7.fhir"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{http://org.hl7.fhir}Patient",
+                  "templateId" : "cqf-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Is",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Predecessor",
+               "operand" : {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}int",
+                  "value" : "2",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "Rs",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Predecessor",
+               "operand" : {
+                  "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                  "value" : "2.2",
+                  "type" : "Literal"
+               }
+            }
+         }, {
+            "name" : "ufr",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "Predecessor",
+               "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                     "valueType" : "{http://www.w3.org/2001/XMLSchema}decimal",
+                     "value" : "9999999999999999999999999999.99999999",
+                     "type" : "Literal"
+                  }
+               }
+            }
          } ]
       }
    }

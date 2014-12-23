@@ -87,10 +87,14 @@ define Md = MaxValue("DateTime")
 
 // @Test: Successor
 
-define Is = Succ(2)
-define Rs = Succ(2.2)
-
+define Is = successor of 2
+define Rs = successor of 2.2
+define ofr = successor of 9999999999999999999999999999.99999999
 // @Test: Predecessor
 
-define Is = Pred(2)
-define Rs = Pred(2.2)
+define Is = predecessor of 2
+define Rs = predecessor 2.2
+define ufr = predecessor of -9999999999999999999999999999.99999999
+
+
+  

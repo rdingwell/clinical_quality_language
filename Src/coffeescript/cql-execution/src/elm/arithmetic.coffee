@@ -303,6 +303,7 @@ module.exports.Successor = class Successor extends Expression
         if nv > MAX_FLOAT_VALUE then throw "Number Overflow Expection" else nv
     else if val instanceof DT.DateTime
       va.successor()    
+ 
 
 module.exports.Predecessor = class Predecessor extends  Expression
   constructor: (json) ->
@@ -313,9 +314,11 @@ module.exports.Predecessor = class Predecessor extends  Expression
     if typeof val == "number"
       if parseInt(val) == val
         nv =  val - 1
-        if nv > MIN_INT_VALUE then throw "Number UNDERFLOW Expection" else nv
+        if nv < MIN_INT_VALUE then throw "Number UNDERFLOW Expection" else nv
       else
         nv =  val  -  MIN_FLOAT_PRECISION_VALUE
-        if nv > MIN_FLOAT_VALUE then throw "Number Overflow Expection" else nv
+        if nv < MIN_FLOAT_VALUE then throw "Number Overflow Expection" else nv
     else if val instanceof DT.DateTime
       va.predecessor()    
+
+ 
